@@ -1,0 +1,284 @@
+[
+    {
+        "id": 1,
+        "projectName": "GTR",
+        "projectStatus": "New",
+        "projectDesc": "Lorem",
+        "projectLeadId": 1,
+        "projectModules": [
+            {
+                "moduleId": 1,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "moduleId": 2,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "moduleId": 3,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1
+                ]
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "projectName": "GTR",
+        "projectStatus": "New",
+        "projectDesc": "Lorem",
+        "projectLeadId": 1,
+        "projectModules": [
+            {
+                "moduleId": 1,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "moduleId": 2,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "moduleId": 3,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "projectName": "GTR",
+        "projectStatus": "New",
+        "projectDesc": "Lorem",
+        "projectLeadId": 1,
+        "projectModules": [
+            {
+                "moduleId": 1,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "moduleId": 2,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "moduleId": 3,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "projectName": "GTR",
+        "projectStatus": "New",
+        "projectDesc": "Lorem",
+        "projectLeadId": 1,
+        "projectModules": [
+            {
+                "moduleId": 1,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "moduleId": 2,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "moduleId": 3,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "projectName": "GTR",
+        "projectStatus": "New",
+        "projectDesc": "Lorem",
+        "projectLeadId": 1,
+        "projectModules": [
+            {
+                "moduleId": 1,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "moduleId": 2,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "moduleId": 3,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "projectDesc": "Lorem",
+        "projectLeadId": 1,
+        "projectModules": [
+            {
+                "moduleId": 1,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "moduleId": 2,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "moduleId": 3,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "projectDesc": "Lorem",
+        "projectLeadId": 1,
+        "projectModules": [
+            {
+                "moduleId": 1,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "moduleId": 2,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "moduleId": 3,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "projectName": "GTR",
+        "projectStatus": "New",
+        "projectDesc": "Lorem",
+        "projectLeadId": 1,
+        "projectModules": [
+            {
+                "moduleId": 1,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "moduleId": 2,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            },
+            {
+                "moduleId": 3,
+                "projectModuleName": "GTR-Product",
+                "moduleLeadId": [
+                    1,
+                    2,
+                    3
+                ]
+            }
+        ]
+    }
+]
