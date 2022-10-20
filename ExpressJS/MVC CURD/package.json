@@ -1,0 +1,19 @@
+{
+  "name": "pratice-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon service.js",
+    "start-prod": "NODE_ENV=production nodemon service.js"
+  },
+  "author": "P_aman",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "mongoose": "^5.13.15",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.19"
+  }
+}
