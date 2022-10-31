@@ -8,4 +8,4 @@ console.log(result)
 
 // ///////////////////////
 // Destructuring
-// const { add } = req uire('./calculator')
+// const { add } = require('./calculator')

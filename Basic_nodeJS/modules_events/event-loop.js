@@ -1,7 +1,9 @@
-// // Understanding the event loop of NodeJS
-// const fs = require('fs');
-// const crypto = require('crypto');
+const http = require('http');
+const fs = require('fs');
+const crypto = require('crypto');
+const EventEmitter = require('events');
 
+// Understanding the event loop of NodeJS
 // const start = Date.now();
 // // // Changing the threadpool time to 1:
 // // process.env.UV_THREADPOOL_SIZE = 1;
@@ -16,31 +18,16 @@
 //     setImmediate(() => console.log('I am immediate!!'));
 //     process.nextTick(() => console.log('I am process.nextTick'));
 //     crypto.pbkdf2('Password', 'salt', 100000, 1024, 'sha512', () => {
-//         console.log(Date.now() - start, 'Password Encrypted');
+//         console.log("Time taken: ",Date.now() - start, 'Password Encrypted');
 //     })
-//     // crypto.pbkdf2('Password', 'salt', 100000, 1024, 'sha512', () => {
-//     //     console.log(Date.now() - start, 'Password Encrypted');
-//     // })
-//     // crypto.pbkdf2('Password', 'salt', 100000, 1024, 'sha512', () => {
-//     //     console.log(Date.now() - start, 'Password Encrypted');
-//     // })
-//     // crypto.pbkdf2('Password', 'salt', 100000, 1024, 'sha512', () => {
-//     //     console.log(Date.now() - start, 'Password Encrypted');
-//     // })
 // });
 // console.log('I am top level code!!');
-//
 
 
 
-
-// EVENT EMITTER
-// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// const EventEmitter = require('events');
-// const http = require('http');
+//////////////////////////////// EVENT EMITTER /////////////////////////////////////
 // const myEmitter = new EventEmitter();
-
-// Extending the event emitter in a class
+//Extending the event emitter in a class
 // class Listener extends EventEmitter {
 //     constructor() {
 //         super();
@@ -54,25 +41,33 @@
 // myEmitter.on("listener", () => {
 //     console.log('This is listener 2!!');
 // });
+// // New event listener
+// myEmitter.once("newListener", (event, listener) => {
+//     if (event === "listener") {
+//         myEmitter.on("listener", () => {
+//             console.log('Once event emitter!!')
+//         })
+//     }
+// })
 // myEmitter.on("listener", args => {
-//     console.log('This is listener 1!!', `With ${args} agruments`);
+//     console.log('This is listener 4!!', `With ${args} agruments`);
 // });
+// myEmitter.emit('listener', 1);
 
-// myEmitter.emit('listener', 1)
 
+/////////////////////////////////////////////////////
+const server = http.createServer();
+server.on('request', (req, res) => {
+    console.log('Request 1 received');
+    res.end('Request 1 received');
+});
+server.on('request', (req, res) => {
+    console.log('Request 2 received');
+});
 
-// // /////////////////////////////////////////////////////
-// const server = http.createServer();
-// server.on('request', (req, res) => {
-//     console.log('Request 1 received');
-//     res.end('Request 1 received');
-// });
-// server.on('request', (req, res) => {
-//     console.log('Request 2 received');
-// });
-
-// server.on('close', () => {
-//     console.log('Server closed!!')
-// });
-
-// server.listen(3000)
+server.on('close', () => {
+    console.log('Server closed!!')
+});
+server.listen(3000, () => {
+    console.log("Server listening on port 3000")
+});

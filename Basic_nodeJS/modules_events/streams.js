@@ -26,7 +26,7 @@ server.on('request', (req, res) => {
     
     
     // PIPE operator
-    const readAble = fs.createReadStream(`${__dirname}/test-fillle.txt`);
+    const readAble = fs.createReadStream(`${__dirname}/test-file.txt`);
     readAble.pipe(res);
 
 
