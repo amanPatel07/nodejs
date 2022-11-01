@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NodeJS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            font-family: 'Nunito Sans', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex: 1 0 0;
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center;
+            margin: 1rem 1rem;
+        }
+
+        .product-container {
+            background: #92d2c3;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 2rem;
+        }
+
+        .product-hero {
+            text-align: center;
+        }
+
+        .product-emoji {
+            font-size: 2.5rem;
+
+        }
+
+        .product__name {
+            padding: 1rem;
+            color: white;
+            text-align: center;
+            word-spacing: 2px;
+        }
+
+        .product-details {
+            display: flex;
+            justify-content: space-around;
+            padding: 4rem 6rem;
+        }
+
+        .product-info {
+            display: flex;
+        }
+
+        .emoji-left{
+            padding-right: 1rem;
+        }
+
+        .product__description {
+            line-height: 1.8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="product-container">
+            <figure class="product">
+                <div class="product-hero">
+                    <span class="product-emoji">{%IMAGE%}</span>
+                    <h2 class="product__name">{%PRODUCTNAME%}</h2>
+                </div>
+                <div class="product-details">
+                    <ul>
+                        <li class="product-info">
+                            <p class="emoji-left">From : </p>
+                            <h5>{%FROM%}</h5>
+                        </li>
+                        <li class="product-info">
+                            <p class="emoji-left">Nutrients : </p>
+                            <h5>{%NUTRIENTS%}</h5>
+                        </li>
+                        <li class="product-info">
+                            <p class="emoji-left">Quantity : </p>
+                            <h5>{%QUANTITY%}</h5>
+                        </li>
+                        <li class="product-info">
+                            <p class="emoji-left">Price : </p>
+                            <h5>{%PRICE%}</h5>
+                        </li>
+                    </ul>
+                    <a href="#" class="product__link">
+                        <p class="emoji-left">🛒</p>
+                        <p>Add to shopping card ({%PRICE%})</p>
+                    </a>
+                </div>
+                <p class="product__description">
+                    {%DESCRIPTION%}
+                </p>
+            </figure>
+        </div>
+
+    </div>
+</body>
+
+</html>

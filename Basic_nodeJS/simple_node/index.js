@@ -36,13 +36,26 @@ const url = require('url');
 // }).listen(3000);
 
 // Create a simple API 
+const readTemplate = fs.readFileSync(`${__dirname}/templates/index.html`, `utf-8`)
 const readApi = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
+const dataObj = JSON.parse(readApi);
+const replaceTemplate = (temp, item) => {
+    let output = temp.replace(/{%PRODUCTNAME%}/g, item.productName);
+    output = output.replace(/{%FROM%}/g, item.from);
+    output = output.replace(/{%NUTRIENTS%}/g, item.nutrients);
+    output = output.replace(/{%QUANTITY%}/g, item.quantity);
+    output = output.replace(/{%PRICE%}/g, item.price);
+    output = output.replace(/{%DESCRIPTION%}/g, item.description);
+    output = output.replace(/{%IMAGE%}/g, item.image);
+    return output;
+}
+
 const apiServer = http.createServer((req, res) => {
     console.log(req.url);
-    console.log(url.parse(req.url, true));
     const pathName = req.url;
     if (pathName === '/staffing' || pathName === '/') {
-        res.end("This is staffing page!!");
+        const card = dataObj.map(item => { return replaceTemplate(readTemplate, item) }).join("")
+        res.end(card);
     } else if (pathName === '/api') {
         res.writeHead(200, { 'Content-type': 'application/json' })
         res.end(readApi);
@@ -51,4 +64,6 @@ const apiServer = http.createServer((req, res) => {
         res.end('Not found')
     }
 })
+console.log(`Dir name :  ${__dirname}`)
+console.log(`File name :  ${__filename}`)
 apiServer.listen(3000);
