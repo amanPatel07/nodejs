@@ -1,0 +1,152 @@
+[
+    {
+        "id": 1,
+        "company": "Tata",
+        "cars": [
+            {
+                "id": 1,
+                "carName": "Harrier",
+                "models": [
+                    {
+                        "modelName": "ZXi",
+                        "fuelType": "Petrol",
+                        "brakeType": "Disc",
+                        "launchYear": 2020,
+                        "transmission": "Manual",
+                        "numberOfCylinder": 3,
+                        "price": 1500000
+                    },
+                    {
+                        "modelName": "YXi",
+                        "fuelType": "Petrol",
+                        "brakeType": "Disc",
+                        "launchYear": 2020,
+                        "transmission": "Automatic",
+                        "numberOfCylinder": 4,
+                        "price": 1800000
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "company": "Tata",
+        "cars": [
+            {
+                "id": 1,
+                "carName": "Harrier",
+                "models": [
+                    {
+                        "modelName": "ZXi",
+                        "fuelType": "Petrol",
+                        "brakeType": "Disc",
+                        "launchYear": 2020,
+                        "transmission": "Manual",
+                        "numberOfCylinder": 3,
+                        "price": 1500000
+                    },
+                    {
+                        "modelName": "YXi",
+                        "fuelType": "Petrol",
+                        "brakeType": "Disc",
+                        "launchYear": 2020,
+                        "transmission": "Automatic",
+                        "numberOfCylinder": 4,
+                        "price": 1800000
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "company": "Tata",
+        "cars": [
+            {
+                "id": 1,
+                "carName": "Harrier",
+                "models": [
+                    {
+                        "modelName": "ZXi",
+                        "fuelType": "Petrol",
+                        "brakeType": "Disc",
+                        "launchYear": 2020,
+                        "transmission": "Manual",
+                        "numberOfCylinder": 3,
+                        "price": 1500000
+                    },
+                    {
+                        "modelName": "YXi",
+                        "fuelType": "Petrol",
+                        "brakeType": "Disc",
+                        "launchYear": 2020,
+                        "transmission": "Automatic",
+                        "numberOfCylinder": 4,
+                        "price": 1800000
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "company": "Tata",
+        "cars": [
+            {
+                "id": 1,
+                "carName": "Harrier",
+                "models": [
+                    {
+                        "modelName": "ZXi",
+                        "fuelType": "Petrol",
+                        "brakeType": "Disc",
+                        "launchYear": 2020,
+                        "transmission": "Manual",
+                        "numberOfCylinder": 3,
+                        "price": 1500000
+                    },
+                    {
+                        "modelName": "YXi",
+                        "fuelType": "Petrol",
+                        "brakeType": "Disc",
+                        "launchYear": 2020,
+                        "transmission": "Automatic",
+                        "numberOfCylinder": 4,
+                        "price": 1800000
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "company": "Tata",
+        "cars": [
+            {
+                "id": 1,
+                "carName": "Harrier",
+                "models": [
+                    {
+                        "modelName": "ZXi",
+                        "fuelType": "Petrol",
+                        "brakeType": "Disc",
+                        "launchYear": 2020,
+                        "transmission": "Manual",
+                        "numberOfCylinder": 3,
+                        "price": 1500000
+                    },
+                    {
+                        "modelName": "YXi",
+                        "fuelType": "Petrol",
+                        "brakeType": "Disc",
+                        "launchYear": 2020,
+                        "transmission": "Automatic",
+                        "numberOfCylinder": 4,
+                        "price": 1800000
+                    }
+                ]
+            }
+        ]
+    }
+]
