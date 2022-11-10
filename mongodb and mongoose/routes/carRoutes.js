@@ -15,7 +15,6 @@ router
     .get(carController.getAllCar)
     .post(carController.postCar)
 
-
 router
     .route('/:id')
     .get(carController.getCar)

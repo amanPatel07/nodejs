@@ -1,20 +1,20 @@
 const express = require('express');
 const carRoute = require('./routes/carRoutes');
-const cors = require('cors')
+const ErrorHandler = require('./utils/ErrorHandler');
+const globalErrorHandler = require('./controller/globalErrorHandler');
 
 const app = express();
 app.use(express.json());
-// app.use(cors(
-//     {
-//         origin: 'http://localhost:4200'
-//     }
-// ));
+
 app.use('/api/car', carRoute);
+
+/**
+ * Middleware function for the Error handling
+ */
 app.all('*', (req, res, next) => {
-    res.status(404)
-        .json({
-            ErrorMesssage: `Cannot get ${req.originalUrl}`
-        })
+    console.log("new error",new ErrorHandler(`Cannot get ${req.originalUrl}`))
+    next(new ErrorHandler(`Cannot get ${req.originalUrl}`, 404))
 })
+app.use(globalErrorHandler)
 
 module.exports = app;

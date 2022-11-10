@@ -50,35 +50,6 @@ const carSchema = new mongoose.Schema(
             }
         }
     },
-
-
-    // {
-    //     company: {
-    //         type: String,
-    //         required: true,
-    //     },
-    //     carName: {
-    //         type: String,
-    //         require: true
-    //     },
-    //     modelName: {
-    //         type: [String],
-    //         validate: [arrayLimit, "Model should be more than or equal to 2"]
-    //     },
-    //     fuelType: [String],
-    //     brakeType: [String],
-    //     launchYear: Number,
-    //     transmission: String,
-    //     numberOfCylinder: Number,
-    //     price: {
-    //         type: Number,
-    //         min: [1000000, "Price must be greater than 1000000"]
-    //     },
-    //     hiddenQuery: {
-    //         type: Boolean,
-    //         default: false
-    //     }
-    // },
     {
         toJSON: { virtuals: true }
     }

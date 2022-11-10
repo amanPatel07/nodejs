@@ -1,139 +1,112 @@
 const Car = require('./../model/carModel');
 const APIFeature = require('./../utils/apiFeatures');
+const asyncCatch = require('./../utils/asyncErrorHandler');
+const ErrorHandler = require('./../utils/ErrorHandler');
 
-exports.getAllCar = async (req, res) => {
-    try {
-        const feature = new APIFeature(Car.find(), req.query)
-            .filter()
-            .sort()
-            .paginate()
-        const cars = await feature.query
-        res.status(200)
-            .json({
-                status: 200,
-                response: {
-                    cars
-                }
-            });
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-exports.getCar = async (req, res) => {
-    try {
-        const car = await Car.findById(req.params.id)
-        res.status(200)
-            .json({
-                status: 200,
-                response: {
-                    car
-                }
-            });
-    } catch (error) {
-        res.status(400)
-            .json({
-                error
-            })
-    }
-}
-
-exports.postCar = async (req, res) => {
-    try {
-        const newCar = await Car.create(req.body);
-        res.status(200)
-            .json({
-                status: 200,
-                response: {
-                    newCar
-                }
-            });
-    }
-    catch (error) {
-        res.status(400)
-            .json({
-                error
-            })
-    }
-}
-
-exports.deleteCar = async (req, res) => {
-    try {
-        const deletedCar = await Car.findByIdAndDelete(req.params.id);
-        res.status(200)
-            .json({
-                status: "Deleted",
-                deletedCar
-            })
-    } catch (error) {
-        res.status(400)
-            .json({
-                error
-            })
-    }
-}
-
-exports.updateCar = async (req, res) => {
-    try {
-        const updatedCar = await Car.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-            runValidators: true
-        })
-        res.status(200)
-            .json({
-                response: updatedCar
-            })
-    } catch (error) {
-        res.status(404)
-            .json({
-                response: error
-            })
-    }
-}
-
-exports.carStats = async (req, res) => {
-    try {
-        const stats = await Car.aggregate([
-            {
-                $unwind: '$color'
-            },
-            {
-                $match: { color: { $eq: 'white' } }
-            },
-            {
-                $group: {
-                    _id: { name: "$name" }
-                }
+exports.getAllCar = asyncCatch(async (req, res, next) => {
+    const feature = new APIFeature(Car.find(), req.query)
+        .filter()
+        .sort()
+        .paginate()
+    const cars = await feature.query
+    res.status(200)
+        .json({
+            status: 200,
+            // results: cars.length,
+            response: {
+                cars
             }
-        ]);
-        console.log(stats)
-        res.status(200)
-            .json({
-                stats
-            })
-    } catch (error) {
-        res.json({
-            status: 404,
-            message: error
         })
-    }
-}
+})
 
-exports.carModels = async (req, res) => {
-    try {
-        const models = await Car.aggregate([
-            {
-                $unwind: '$color'
-            }
-        ])
-        res.status(200)
-            .json({
-                models
-            })
-    } catch (error) {
-        res.json({
-            status: 'fail',
-            message: error
-        })
+exports.getCar = asyncCatch(async (req, res, next) => {
+    const car = await Car.findById(req.params.id);
+    if (!car) {
+        return next(new ErrorHandler(`Cannot find the id`, 404))
     }
-}
+    res.status(200)
+        .json({
+            status: 200,
+            response: {
+                car
+            }
+        });
+})
+
+exports.postCar = asyncCatch(async (req, res, next) => {
+    const car = await Car.create(req.body);
+    if (!car) {
+        return next(new ErrorHandler(`Cannot find the id`, 404))
+    }
+    res.status(200)
+        .json({
+            status: 200,
+            response: {
+                car
+            }
+        });
+})
+
+exports.deleteCar = asyncCatch(async (req, res, next) => {
+    const car = await Car.findByIdAndDelete(req.params.id);
+    if (!car) {
+        return next(new ErrorHandler(`Cannot find the id`, 404))
+    }
+    res.status(200)
+        .json({
+            status: "Deleted",
+            car
+        })
+
+})
+
+exports.updateCar = asyncCatch(async (req, res, next) => {
+    const car = await Car.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true
+    })
+    if (!car) {
+        return next(new ErrorHandler(`Cannot find the id`, 404))
+    }
+    res.status(200)
+        .json({
+            status: 200,
+            response: {
+                car
+            }
+        })
+})
+
+exports.carStats = asyncCatch(async (req, res, next) => {
+    const stats = await Car.aggregate([
+        {
+            $unwind: '$color'
+        },
+        {
+            $match: { color: { $eq: 'white' } }
+        },
+        {
+            $group: {
+                _id: { name: "$name" }
+            }
+        }
+    ]);
+    console.log(stats)
+    res.status(200)
+        .json({
+            stats
+        })
+})
+
+exports.carModels = asyncCatch(async (req, res, next) => {
+    const models = await Car.aggregate([
+        {
+            $unwind: '$color'
+        }
+    ])
+    res.status(200)
+        .json({
+            // results: models.length,
+            models
+        })
+})
