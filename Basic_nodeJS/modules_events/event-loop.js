@@ -1,6 +1,6 @@
-// // Understanding the event loop of NodeJS
-// const fs = require('fs');
-// const crypto = require('crypto');
+// Understanding the event loop of NodeJS
+const fs = require('fs');
+const crypto = require('crypto');
 
 // const start = Date.now();
 // // // Changing the threadpool time to 1:
@@ -29,36 +29,36 @@
 //     // })
 // });
 // console.log('I am top level code!!');
-//
+// //
 
 
 
 
 // EVENT EMITTER
 // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// const EventEmitter = require('events');
-// const http = require('http');
+const EventEmitter = require('events');
+const http = require('http');
 // const myEmitter = new EventEmitter();
 
 // Extending the event emitter in a class
-// class Listener extends EventEmitter {
-//     constructor() {
-//         super();
-//     }
-// }
-// const myEmitter = new Listener();
+class Listener extends EventEmitter {
+    constructor() {
+        super();
+    }
+}
+const myEmitter = new Listener();
 
-// myEmitter.on("listener", () => {
-//     console.log('This is listener 1!!');
-// });
-// myEmitter.on("listener", () => {
-//     console.log('This is listener 2!!');
-// });
-// myEmitter.on("listener", args => {
-//     console.log('This is listener 1!!', `With ${args} agruments`);
-// });
+myEmitter.on("listener", () => {
+    console.log('This is listener 1!!');
+});
+myEmitter.on("listener", () => {
+    console.log('This is listener 2!!');
+});
+myEmitter.on("listener", args => {
+    console.log('This is listener 1!!', `With ${args} agruments`);
+});
 
-// myEmitter.emit('listener', 1)
+myEmitter.emit('listener', 1)
 
 
 // // /////////////////////////////////////////////////////

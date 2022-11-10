@@ -21,23 +21,23 @@ const writeFilePro = (file, data) => {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Promise
-readFilePro(`${__dirname}/dog.txt`)
-    .then(res => {
-        return superagent.get(res)
-    })
-    .then(res => {
-        return writeFilePro('dog-list.txt', 'my list')
-    })
-    .then(() => {
-        console.log('Hurrah, Done!!')
-    })
-    .catch(err => {
-        console.log(err)
-    })
+// // Promise
+// readFilePro(`${__dirname}/dog.txt`)
+//     .then(res => {
+//         return superagent.get(res)
+//     })
+//     .then(res => {
+//         return writeFilePro('dog-list.txt', 'my list')
+//     })
+//     .then(() => {
+//         console.log('Hurrah, Done!!')
+//     })
+//     .catch(err => {
+//         console.log(err)
+//     })
 
-const pathname = path.basename('/node_modules/bin')
-console.log(pathname)
+// const pathname = path.basename('/node_modules/bin')
+// console.log(pathname)
 
 
 
@@ -99,7 +99,7 @@ const getFileRead = async () => {
         const finaldata = allPromise.map(el => el.body.message)
         console.log(finaldata)
 
-        await writeFilePro('dog-list.txt', 'finaldata')
+        await writeFilePro('dog-list.txt', JSON.stringify(finaldata))
     }
     catch (err) {
         console.log(err)
@@ -141,17 +141,16 @@ writeFilePro1('delete.txt', 'delete')
     })
 
 
-/*
-writeFilePro1('delete.txt', 'delete')
-    .then(()=> {
-        console.log('Done')
-    })
 
-const getDeletedFile = async () => {
-    const writing = await writeFilePro1('delete.txt', 'delete')
-    console.log(writing)
+// writeFilePro1('delete.txt', 'delete')
+//     .then(()=> {
+//         console.log('Done')
+//     })
+
+// const getDeletedFile = async () => {
+//     const writing = await writeFilePro1('delete.txt', 'delete')
+//     console.log(writing)
      
-    await deleteFile(`${__dirname}/delete.txt`)
-}
-getDeletedFile()
-*/
+//     await deleteFile(`${__dirname}/delete.txt`)
+// }
+// getDeletedFile()
