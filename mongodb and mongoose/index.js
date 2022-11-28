@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/api/car', carRoute);
-app.use('/api/singup', userRoute)
+app.use('/api/user', userRoute)
 
 
 /**
