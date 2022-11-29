@@ -1,4 +1,5 @@
 const express = require('express');
+const authController = require('./../controller/authController');
 const carController = require('./../controller/carController');
 const router = express.Router();
 
@@ -19,7 +20,7 @@ router
     .route('/:id')
     .get(carController.getCar)
     .patch(carController.updateCar)
-    .delete(carController.deleteCar)
+    .delete(authController.authUser, authController.restrictTo('admin'), carController.deleteCar)
 
 
 module.exports = router;
