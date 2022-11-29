@@ -55,12 +55,15 @@ exports.login = asyncCatch(async (req, res, next) => {
      * Check whether the user exists with the requested email
      */
     const user = await User.findOne({ email }).select('+password')
+    if (!user) {
+        return next(new ErrorHandler('Incorrect email', 401))
+    }
     /**
      * Check whether the user is logining with the correct password
      */
     const authUser = await user.checkPassword(password, user.password)
-    if (!user || !authUser) {
-        return next(new ErrorHandler('Incorrect email or password', 401))
+    if (!authUser) {
+        return next(new ErrorHandler('Incorrect password', 401))
     }
 
     const access_Token = signToken(user._id)
