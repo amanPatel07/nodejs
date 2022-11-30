@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const Sale = require('./saleModel');
+
+
 
 const userSchema = new mongoose.Schema(
     {
@@ -37,16 +40,23 @@ const userSchema = new mongoose.Schema(
             type: String,
             enum: ['admin', 'user'],
             default: 'user'
-        }
+        },
+        cars_own: Array
     }
 );
 
-userSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) return next();
-    this.password = await bcrypt.hash(this.password, 12);
-    this.confirmPassword = undefined;
-    next();
-})
+// userSchema.pre('save', async function (next) {
+//     if (!this.isModified('password')) return next();
+//     this.password = await bcrypt.hash(this.password, 12);
+//     this.confirmPassword = undefined;
+//     next();
+// });
+
+// userSchema.pre('save', async function (next) {
+//     const carPromise = this.cars_own.map(async (id) => await Sale.findById(id));
+//     this. cars_own = await Promise.all(carPromise);
+//     next();
+// })
 
 userSchema.methods.checkPassword = async function (currentPassword, userPassword) {
     return await bcrypt.compare(currentPassword, userPassword)

@@ -7,7 +7,15 @@ router.post('/signup', authController.signup)
 router.post('/login', authController.login)
 
 router
-    .route('/')
-    .get(authController.authUser, userController.getUser)
+    .route('/carPurchase')
+    .post(userController.carPurchase)
+
+router
+.route('/')
+.get(authController.authUser, userController.getAllUser)
+
+router
+.route('/:id')
+.get(userController.getUser)
 
 module.exports = router
