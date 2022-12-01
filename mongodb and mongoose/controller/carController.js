@@ -20,7 +20,7 @@ exports.getAllCar = asyncCatch(async (req, res, next) => {
 })
 
 exports.getCar = asyncCatch(async (req, res, next) => {
-    const car = await Car.findById(req.params.id);
+    const car = await Car.findById(req.params.id).populate('reviews');
     if (!car) {
         return next(new ErrorHandler(`Cannot find the id`, 404))
     }

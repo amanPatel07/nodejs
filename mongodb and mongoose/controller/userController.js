@@ -15,7 +15,12 @@ exports.getAllUser = asyncCatch(async (req, res, next) => {
 })
 
 exports.getUser = asyncCatch(async (req, res, next) => {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id).populate(
+        {
+            path: 'car_purchase_details',
+            select: "-__v -ownedBy"
+        }
+    );
     if (!user) {
         return next(new ErrorHandler(`Cannot find the id`, 404))
     }
@@ -30,12 +35,19 @@ exports.getUser = asyncCatch(async (req, res, next) => {
 
 exports.carPurchase = asyncCatch(async (req, res, next) => {
     const newPurchase = await Sale.create(req.body);
-    if(!newPurchase) { 
-        return next(new ErrorHandler(`Something went wrong`, 404))
+
+    // const user = await User.findByIdAndUpdate(newPurchase.ownedBy, { car_purchase_details: await  })
+
+    const user = await User.findById(newPurchase.ownedBy);
+    const updateUser = await user.updateUserPurchaseDetails(newPurchase);
+    await User.findByIdAndUpdate(newPurchase.ownedBy, { car_purchase_details: updateUser });
+
+    if (!newPurchase) {
+        return next(new ErrorHandler(`Something went wrong`, 404));
     }
     res.status(200)
         .json({
             status: 200,
             newPurchase
-        })
+        });
 });

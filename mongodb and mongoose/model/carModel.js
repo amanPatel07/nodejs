@@ -51,7 +51,8 @@ const carSchema = new mongoose.Schema(
         }
     },
     {
-        toJSON: { virtuals: true }
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true }
     }
 );
 
@@ -61,9 +62,19 @@ const carSchema = new mongoose.Schema(
 // }
 
 // Creating a virtual properties
-carSchema.virtual('date').get(function () {
-    return this.year.toString()
-});
+// carSchema.virtual('date').get(function () {
+//     return this.year.toString()
+// });
+
+/**
+ * Virtual Populate
+ */
+carSchema.virtual('reviews', {
+    ref: 'Review',
+    foreignField: 'car',
+    localField: '_id'
+})
+
 
 // Creating a document middleware
 carSchema.pre('save', function(next) {

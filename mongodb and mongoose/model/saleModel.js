@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const User = require('./../model/userModel');
 
 const saleModel = new mongoose.Schema(
@@ -15,13 +16,6 @@ const saleModel = new mongoose.Schema(
 
     }
 );
-
-saleModel.pre('save', async function (next) {
-    console.log(this.ownedBy)
-    const updateUser = await User.findById(this.ownedBy)
-    // console.log(updateUser)
-    next()
-})
 
 const Sale = mongoose.model('Sale', saleModel);
 
