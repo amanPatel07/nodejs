@@ -77,7 +77,6 @@ userSchema.methods.isPasswordChangedAfter = function (JwtTimeStamp) {
 }
 
 userSchema.methods.updateUserPurchaseDetails = async function (carSold) {
-    console.log(carSold, this.car_purchase_details)
     await this.car_purchase_details.push(carSold._id)
     return this.car_purchase_details
 }

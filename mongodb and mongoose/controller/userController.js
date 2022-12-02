@@ -18,9 +18,15 @@ exports.getUser = asyncCatch(async (req, res, next) => {
     const user = await User.findById(req.params.id).populate(
         {
             path: 'car_purchase_details',
-            select: "-__v -ownedBy"
+            select: "-__v -ownedBy",
+            populate: {
+                path: 'carPurchase',
+                model: 'Cars',
+                select: 'name'
+            }
+            
         }
-    );
+    ).select('-__v');
     if (!user) {
         return next(new ErrorHandler(`Cannot find the id`, 404))
     }

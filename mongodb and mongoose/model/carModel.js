@@ -8,7 +8,7 @@ const carSchema = new mongoose.Schema(
             unique: [true, "The car name should be unique."],
             maxlength: [25, "The length should not be more than 25."]
         },
-        miles_per_gallon: {
+        milage: {
             type: Number,
             required: true,
             min: [15, "The minimum gallons should not be less than 15."],
@@ -22,32 +22,28 @@ const carSchema = new mongoose.Schema(
         displacement: {
             type: Number,
             min: [100, "The displacement should not be less than 100."],
-            max: [500, "The displacement should not be more than 500."]
+            max: [5000, "The displacement should not be more than 5000."]
         },
-        horsePower: {
-            type: Number
+        fuelType: {
+            type: String
         },
-        weight_in_kg: {
-            type: Number
+        transmission: {
+            type: String
         },
-        acceleration: {
-            type: Number
-        },
-        year: {
-            type: Date
-        },
-        origin: {
-            type: String,
-            required: true
+        seat: {
+            type: Number,
+            min: 2,
+            max: 9
         },
         color: {
-            type: [String],
-            validate: {
-                validator: function(item) {
-                    return item.length >= 2 
-                },
-                message: "There should be minimum 2 color be available."
-            }
+            type: String
+            // type: [String],
+            // validate: {
+            //     validator: function(item) {
+            //         return item.length >= 2 
+            //     },
+            //     message: "There should be minimum 2 color be available."
+            // }
         }
     },
     {
@@ -55,6 +51,15 @@ const carSchema = new mongoose.Schema(
         toObject: { virtuals: true }
     }
 );
+
+/**
+ * Virtual Populate
+ */
+carSchema.virtual('reviews', {
+    ref: 'Review',
+    foreignField: 'car',
+    localField: '_id'
+})
 
 // // array validation
 // function arrayLimit(item) {
@@ -66,24 +71,15 @@ const carSchema = new mongoose.Schema(
 //     return this.year.toString()
 // });
 
-/**
- * Virtual Populate
- */
-carSchema.virtual('reviews', {
-    ref: 'Review',
-    foreignField: 'car',
-    localField: '_id'
-})
-
-
 // Creating a document middleware
-carSchema.pre('save', function(next) {
-    let date = this.year.toString()
-    console.log(date)
-    let dateS = new Date(date)
-    console.log(dateS)
-    next();
-});
+// carSchema.pre('save', function(next) {
+//     let date = this.year.toString()
+//     console.log(date)
+//     let dateS = new Date(date)
+//     console.log(dateS)
+//     next();
+// });
+
 // carSchema.post('save', function(doc, next) {
 //     console.log('Post middleware', doc);
 //     next();

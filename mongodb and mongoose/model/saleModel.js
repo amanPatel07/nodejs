@@ -6,11 +6,13 @@ const saleModel = new mongoose.Schema(
     {
         carPurchase: {
             type: mongoose.Schema.ObjectId,
-            ref: 'Cars'
+            ref: 'Cars',
+            required: [true, 'The car is required']
         },
         ownedBy: {
             type: mongoose.Schema.ObjectId,
-            ref: 'User'
+            ref: 'User',
+            required: [true, 'The owner is required']
         },
         purchaseDate: Date,
 
