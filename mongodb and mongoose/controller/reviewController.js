@@ -1,21 +1,40 @@
 const asyncCatch = require('./../utils/asyncErrorHandler');
-const Review = require('./../model/reviewModel')
+const Review = require('./../model/reviewModel');
+const factory = require('./handlerFactory');
 
+exports.setCarUserId = (req, res, next) => {
+    /**
+     * Allow Nested Route 
+     */
+     if (!req.body.car) req.body.car = req.params.carId;
+     if (!req.body.user) req.body.user = req.user.id;
+     next();
+}
+
+exports.getAllReviews = factory.getAllDoc(Review);
+exports.getReview = factory.getDoc(Review, false, '-__v');
+exports.deleteReview = factory.deleteOne(Review);
+exports.createReview = factory.createDoc(Review);
+exports.updateReview = factory.updateOne(Review);
+
+
+/*
 exports.getAllReviews = asyncCatch(async (req, res, next) => {
-    const reviews = await Review.find().select('-__v');
+    let filter = {};
+    if (req.params.carId) filter = { car: req.params.carId }
+
+    const reviews = await Review.find(filter).select('-__v');
     res.status(200)
         .json({
             reviews
         });
 });
-
 exports.createReview = asyncCatch(async (req, res, next) => {
 
-    /**
      * Allow Nested Route 
-     */
-    if(!req.body.car) req.body.car = req.params.carId;
-    if(!req.body.user) req.body.user = req.user.id;
+     *
+    if (!req.body.car) req.body.car = req.params.carId;
+    if (!req.body.user) req.body.user = req.user.id;
 
     const newReview = await Review.create(req.body);
     res.status(201)
@@ -23,7 +42,6 @@ exports.createReview = asyncCatch(async (req, res, next) => {
             newReview
         });
 });
-
 exports.getReview = asyncCatch(async (req, res, next) => {
     const review = await Review.findById(req.params.id)
         .populate(
@@ -43,4 +61,5 @@ exports.getReview = asyncCatch(async (req, res, next) => {
         .json({
             review
         })
-})
+});
+*/

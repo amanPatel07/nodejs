@@ -11,11 +11,13 @@ router
     .post(
         authController.authUser,
         authController.restrictTo('user'),
+        reviewController.setCarUserId,
         reviewController.createReview
     )
     
 router
     .route('/:id')
     .get(reviewController.getReview)
+    .delete(reviewController.deleteReview)
 
 module.exports = router;

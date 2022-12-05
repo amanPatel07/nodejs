@@ -25,6 +25,7 @@ router
     .route('/:id')
     .get(carController.getCar)
     .patch(carController.updateCar)
-    .delete(authController.authUser, authController.restrictTo('admin'), carController.deleteCar)
+    .delete(carController.deleteCar)
+    // .delete(authController.authUser, authController.restrictTo('admin'), carController.deleteCar)
 
 module.exports = router;

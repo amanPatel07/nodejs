@@ -11,7 +11,7 @@ const carSchema = new mongoose.Schema(
         milage: {
             type: Number,
             required: true,
-            min: [15, "The minimum gallons should not be less than 15."],
+            min: [10, "The minimum gallons should not be less than 10."],
             max: [40, "The minimum gallons should not be more than 40."]
         },
         cylinders: {

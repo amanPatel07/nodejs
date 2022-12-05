@@ -23,7 +23,7 @@ exports.signup = asyncCatch(async (req, res, next) => {
     //     passwordChangedAt: req.body.passwordChangedAt,
     //     role: req.body.role
     // });
-    const newUser = await (await User.create(req.body))
+    const newUser = await User.create(req.body)
     if (!newUser) {
         return next(new ErrorHandler('Something went wrong!', 404))
     }
