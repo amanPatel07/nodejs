@@ -6,11 +6,11 @@ const carSchema = new mongoose.Schema(
             type: String,
             required: true,
             unique: [true, "The car name should be unique."],
-            maxlength: [25, "The length should not be more than 25."]
+            // maxlength: [25, "The length should not be more than 25."]
         },
         milage: {
             type: Number,
-            required: true,
+            // required: true,
             min: [10, "The minimum gallons should not be less than 10."],
             max: [40, "The minimum gallons should not be more than 40."]
         },
@@ -44,7 +44,9 @@ const carSchema = new mongoose.Schema(
             //     },
             //     message: "There should be minimum 2 color be available."
             // }
-        }
+        },
+        price: String,
+        image: String
     },
     {
         toJSON: { virtuals: true },

@@ -1,5 +1,7 @@
 const asyncCatch = require('./../utils/asyncErrorHandler');
 const APIFeature = require('./../utils/apiFeatures');
+const ErrorHandler = require('./../utils/ErrorHandler');
+const mongoose = require('mongoose');
 
 /**
  * @param {Car, Review, User} Model 
@@ -32,7 +34,8 @@ exports.getDoc = (Model, populateOption, selectOption) => asyncCatch(async (req,
     let query = Model.findById(req.params.id);
     if(populateOption) query = query.populate(populateOption);
     if(selectOption) query = query.select(selectOption);
-    const doc = await query;
+    const doc = await query.lean();
+    console.log(doc instanceof mongoose.Document)
     if (!doc) {
         return next(new ErrorHandler(`Cannot find the id`, 404));
     }
@@ -49,6 +52,9 @@ exports.getDoc = (Model, populateOption, selectOption) => asyncCatch(async (req,
  * @returns 
  */
 exports.createDoc = Model => asyncCatch(async (req, res, next) => {
+
+    console.log(req.file)
+
     const doc = await Model.create(req.body);
     if (!doc) {
         return next(new ErrorHandler(`Failed to create a document`, 404))
@@ -66,6 +72,11 @@ exports.createDoc = Model => asyncCatch(async (req, res, next) => {
  * @returns 
  */
 exports.updateOne = Model => asyncCatch(async (req, res, next) => {
+    // let filterBody;
+    // if(req.file) filterBody = req.file;
+    // if(!req.body) filterBody = req.file;
+    
+    console.log(req.file)
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true
@@ -73,6 +84,7 @@ exports.updateOne = Model => asyncCatch(async (req, res, next) => {
     if (!doc) {
         return next(new ErrorHandler(`Cannot find the id`, 404));
     }
+    console.log(doc)
     res.status(200)
         .json({
             status: 200,

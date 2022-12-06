@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const reviewModel = new mongoose.Schema(
+const reviewSchema = new mongoose.Schema(
     {
         review: {
             type: String
@@ -25,6 +25,8 @@ const reviewModel = new mongoose.Schema(
     }
 );
 
-const Review = mongoose.model('Review', reviewModel);
+reviewSchema.index({ car: 1, user: 1 }, { unique: true })
+
+const Review = mongoose.model('Review', reviewSchema);
 
 module.exports = Review;

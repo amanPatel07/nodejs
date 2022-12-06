@@ -19,12 +19,12 @@ router
 router
     .route('/')
     .get(carController.getAllCar)
-    .post(carController.postCar)
+    .post(carController.uploadCarImage, carController.postCar)
 
 router
     .route('/:id')
     .get(carController.getCar)
-    .patch(carController.updateCar)
+    .patch(carController.uploadCarImage, carController.updateCar)
     .delete(carController.deleteCar)
     // .delete(authController.authUser, authController.restrictTo('admin'), carController.deleteCar)
 
