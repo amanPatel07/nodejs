@@ -5,8 +5,12 @@ const userController = require('./../controller/userController');
 
 const router = express.Router();
 
-router.post('/signup', authController.signup)
-router.post('/login', authController.login)
+router.post('/signup', authController.signup);
+router.post('/login', authController.login);
+
+router.patch('/updatePassword', authController.authUser, authController.updatePassword);
+router.patch('/updateMe', authController.authUser, userController.updateCurrentUser);
+router.delete('/deleteMe', authController.authUser, userController.deleteCurrentUser)
 
 router
     .route('/carPurchase')

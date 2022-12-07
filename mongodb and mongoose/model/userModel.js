@@ -43,7 +43,11 @@ const userSchema = new mongoose.Schema(
                 type: mongoose.Schema.ObjectId,
                 ref: 'Sale'
             }
-        ]
+        ],
+        active: {
+            type: Boolean,
+            default: true
+        }
     }
 );
 
@@ -62,6 +66,11 @@ userSchema.pre('save', async function (next) {
     next();
 })
 */
+
+userSchema.pre(/^find/, function (next) {
+    this.find({ active: { $ne: false } });
+    next();
+});
 
 
 userSchema.methods.checkPassword = async function (currentPassword, userPassword) {

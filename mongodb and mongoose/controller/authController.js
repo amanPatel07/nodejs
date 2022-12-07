@@ -8,21 +8,13 @@ const ErrorHandler = require('./../utils/ErrorHandler');
 const signToken = id => {
     return jwt.sign({ id }, process.env.JWT_TOKEN, {
         expiresIn: process.env.JWT_ExpiresIn
-    })
+    });
 }
 
 /**
  * Sign up for the new Uer
  */
 exports.signup = asyncCatch(async (req, res, next) => {
-    // const newUser = await User.create({
-    //     name: req.body.name,
-    //     email: req.body.email,
-    //     password: req.body.password,
-    //     confirmPassword: req.body.confirmPassword,
-    //     passwordChangedAt: req.body.passwordChangedAt,
-    //     role: req.body.role
-    // });
     const newUser = await User.create(req.body)
     if (!newUser) {
         return next(new ErrorHandler('Something went wrong!', 404))
@@ -55,7 +47,8 @@ exports.login = asyncCatch(async (req, res, next) => {
     /**
      * Check whether the user exists with the requested email
      */
-    const user = await User.findOne({ email }).select('+password')
+    const user = await User.findOne({ email }).select('+password');
+    console.log(user)
     if (!user) {
         return next(new ErrorHandler('Incorrect email', 401))
     }
@@ -72,7 +65,7 @@ exports.login = asyncCatch(async (req, res, next) => {
         status: "success",
         access_Token
     })
-})
+});
 
 /**
  * Middleware to protect the route from the unauthorized user login or accessing route without logged in
@@ -106,7 +99,7 @@ exports.authUser = asyncCatch(async (req, res, next) => {
     /**
      * Check if the password is changedd after the token is generated
      */
-    if(currentUser.isPasswordChangedAfter(decodedToken.iat)) {
+    if (currentUser.isPasswordChangedAfter(decodedToken.iat)) {
         return next(new ErrorHandler('The user password is changed recently, try logging again', 401));
     }
 
@@ -119,9 +112,36 @@ exports.authUser = asyncCatch(async (req, res, next) => {
  */
 exports.restrictTo = (...role) => {
     return (req, res, next) => {
-        if(!role.includes(req.user.role)){
+        if (!role.includes(req.user.role)) {
             return next(new ErrorHandler('You are not authorized to perform the action', 403))
         }
         next();
     }
 }
+
+/**
+ * Update the logged in user password  
+ */
+exports.updatePassword = asyncCatch(async (req, res, next) => {
+    const currentUser = await User.findById(req.user.id).select('+password');
+    if (!(await currentUser.checkPassword(req.body.currentPassword, currentUser.password))) {
+        return next(new ErrorHandler('Your Current password is wrong! Please login again', 401))
+    }
+
+    /**
+     * Save the new password
+     */
+    currentUser.password = req.body.password;
+    currentUser.confirmPassword = req.body.confirmPassword;
+    await currentUser.save();
+    
+    const access_Token = signToken(currentUser._id);
+    currentUser.password = undefined;
+
+    res.status(200)
+        .json({
+            status: 200,
+            data: currentUser,
+            access_Token
+        });
+});

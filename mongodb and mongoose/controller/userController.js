@@ -2,6 +2,15 @@ const Sale = require('./../model/saleModel');
 const User = require('./../model/userModel');
 const asyncCatch = require('./../utils/asyncErrorHandler');
 const factory = require('./handlerFactory');
+const ErrorHandler = require('./../utils/ErrorHandler');
+
+const filterObj = (obj, ...allowedField) => {
+    let newObject = {};
+    Object.keys(obj).forEach(item => {
+        if (allowedField.includes(item)) newObject[item] = obj[item];
+    });
+    return newObject;
+}
 
 exports.getAllUser = factory.getAllDoc(User);
 exports.getUser = factory.getDoc(User,
@@ -35,6 +44,36 @@ exports.carPurchase = asyncCatch(async (req, res, next) => {
         .json({
             status: 200,
             newPurchase
+        });
+});
+
+exports.updateCurrentUser = asyncCatch(async (req, res, next) => {
+
+    /**
+     * Check 
+     */
+    if (req.body.password || req.body.confirmPassword) {
+        return next(new ErrorHandler('To change password, change the route to updatePassword', 400))
+    }
+
+    const filteredBody = filterObj(req.body, 'name', 'email');
+    const updatedUser = await User.findByIdAndUpdate(req.user._id, filteredBody, {
+        new: true,
+        runValidators: true
+    });
+
+    res.status(200)
+        .json({
+            status: 200,
+            data: updatedUser
+        });
+});
+
+exports.deleteCurrentUser = asyncCatch(async (req, res, next) => {
+    await User.findByIdAndUpdate(req.user._id, { active: false });
+    res.status(200)
+        .json({
+            data: null
         });
 });
 

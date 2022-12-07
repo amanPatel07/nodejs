@@ -5,6 +5,9 @@ const asyncCatch = require('./../utils/asyncErrorHandler');
 const ErrorHandler = require('./../utils/ErrorHandler');
 const factory = require('./handlerFactory');
 
+/**
+ * Folder path and file name of the uploaded file for saving the file. 
+ */
 const multerStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './../dev-data/carImage');
