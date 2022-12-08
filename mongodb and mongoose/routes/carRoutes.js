@@ -3,6 +3,7 @@ const express = require('express');
 const authController = require('./../controller/authController');
 const carController = require('./../controller/carController');
 const reviewRouter = require('./../routes/reviewRoute');
+const fileController = require('./../controller/fileController');
 
 const router = express.Router();
 
@@ -19,12 +20,12 @@ router
 router
     .route('/')
     .get(carController.getAllCar)
-    .post(carController.uploadCarImage, carController.postCar)
+    .post(carController.postCar)
 
 router
     .route('/:id')
     .get(carController.getCar)
-    .patch(carController.uploadCarImage, carController.updateCar)
+    .patch(carController.updateCar)
     .delete(carController.deleteCar)
     // .delete(authController.authUser, authController.restrictTo('admin'), carController.deleteCar)
 

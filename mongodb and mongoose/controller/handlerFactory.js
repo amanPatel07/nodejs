@@ -52,9 +52,6 @@ exports.getDoc = (Model, populateOption, selectOption) => asyncCatch(async (req,
  * @returns 
  */
 exports.createDoc = Model => asyncCatch(async (req, res, next) => {
-
-    console.log(req.file)
-
     const doc = await Model.create(req.body);
     if (!doc) {
         return next(new ErrorHandler(`Failed to create a document`, 404))
@@ -72,11 +69,8 @@ exports.createDoc = Model => asyncCatch(async (req, res, next) => {
  * @returns 
  */
 exports.updateOne = Model => asyncCatch(async (req, res, next) => {
-    // let filterBody;
-    // if(req.file) filterBody = req.file;
-    // if(!req.body) filterBody = req.file;
-    
-    console.log(req.file)
+    console.log(req.body);
+    console.log(req.file);
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true
@@ -85,11 +79,11 @@ exports.updateOne = Model => asyncCatch(async (req, res, next) => {
         return next(new ErrorHandler(`Cannot find the id`, 404));
     }
     console.log(doc)
-    res.status(200)
-        .json({
-            status: 200,
-            data: doc
-        });
+    // res.status(200)
+    //     .json({
+    //         status: 200,
+    //         data: doc
+    //     });
 });
 
 /** 
@@ -105,6 +99,5 @@ exports.deleteOne = Model => asyncCatch(async (req, res, next) => {
     res.status(200)
         .json({
             status: "Deleted",
-        })
-
+        });
 });

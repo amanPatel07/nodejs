@@ -44,6 +44,7 @@ const userSchema = new mongoose.Schema(
                 ref: 'Sale'
             }
         ],
+        image: String,
         active: {
             type: Boolean,
             default: true

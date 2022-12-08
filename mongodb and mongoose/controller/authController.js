@@ -48,7 +48,6 @@ exports.login = asyncCatch(async (req, res, next) => {
      * Check whether the user exists with the requested email
      */
     const user = await User.findOne({ email }).select('+password');
-    console.log(user)
     if (!user) {
         return next(new ErrorHandler('Incorrect email', 401))
     }

@@ -1,14 +1,20 @@
+const multer = require('multer');
+
 const Sale = require('./../model/saleModel');
 const User = require('./../model/userModel');
 const asyncCatch = require('./../utils/asyncErrorHandler');
 const factory = require('./handlerFactory');
 const ErrorHandler = require('./../utils/ErrorHandler');
+const fileController = require('./fileController');
+
+exports.uploadFile = fileController.upload.single('image')
 
 const filterObj = (obj, ...allowedField) => {
     let newObject = {};
     Object.keys(obj).forEach(item => {
         if (allowedField.includes(item)) newObject[item] = obj[item];
     });
+    console.log(newObject)
     return newObject;
 }
 
@@ -49,14 +55,13 @@ exports.carPurchase = asyncCatch(async (req, res, next) => {
 
 exports.updateCurrentUser = asyncCatch(async (req, res, next) => {
 
-    /**
-     * Check 
-     */
     if (req.body.password || req.body.confirmPassword) {
         return next(new ErrorHandler('To change password, change the route to updatePassword', 400))
     }
 
     const filteredBody = filterObj(req.body, 'name', 'email');
+    if (req.file) filteredBody.image = req.file.filename;
+
     const updatedUser = await User.findByIdAndUpdate(req.user._id, filteredBody, {
         new: true,
         runValidators: true
@@ -103,3 +108,9 @@ exports.getUser = asyncCatch(async (req, res, next) => {
         });
 });
 */
+
+exports.exampleformdata = asyncCatch(async (req, res, next) => {
+    console.log(req.body);
+    console.log(req.file);
+    // console.log(req.file.mimetype.split('/')[1]);
+});
