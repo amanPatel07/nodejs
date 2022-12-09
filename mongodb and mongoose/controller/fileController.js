@@ -14,8 +14,13 @@ const multerStorage = multer.diskStorage({
     }
 });
 
+/**
+ * Array of files allowed for upload 
+ */
+const allowedFiles = ['png', 'pdf', 'jpg', 'jpeg'];
+
 const multerFilter = (req, file, cb) => {
-    if (file.mimetype.startsWith('image')) {
+    if (allowedFiles.includes(file.mimetype.split('/')[1])) {
         cb(null, true)
     } else {
         cb(new ErrorHandler('Not a image! Upload only image', 400), false)

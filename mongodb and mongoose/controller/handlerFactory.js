@@ -69,8 +69,6 @@ exports.createDoc = Model => asyncCatch(async (req, res, next) => {
  * @returns 
  */
 exports.updateOne = Model => asyncCatch(async (req, res, next) => {
-    console.log(req.body);
-    console.log(req.file);
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true
@@ -78,12 +76,11 @@ exports.updateOne = Model => asyncCatch(async (req, res, next) => {
     if (!doc) {
         return next(new ErrorHandler(`Cannot find the id`, 404));
     }
-    console.log(doc)
-    // res.status(200)
-    //     .json({
-    //         status: 200,
-    //         data: doc
-    //     });
+    res.status(200)
+        .json({
+            status: 200,
+            data: doc
+        });
 });
 
 /** 

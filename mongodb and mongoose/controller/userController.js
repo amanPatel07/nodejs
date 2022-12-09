@@ -6,15 +6,14 @@ const asyncCatch = require('./../utils/asyncErrorHandler');
 const factory = require('./handlerFactory');
 const ErrorHandler = require('./../utils/ErrorHandler');
 const fileController = require('./fileController');
-
-exports.uploadFile = fileController.upload.single('image')
+let nameFile = 'image'
+exports.uploadFile = fileController.upload.single(nameFile)
 
 const filterObj = (obj, ...allowedField) => {
     let newObject = {};
     Object.keys(obj).forEach(item => {
         if (allowedField.includes(item)) newObject[item] = obj[item];
     });
-    console.log(newObject)
     return newObject;
 }
 
@@ -54,11 +53,9 @@ exports.carPurchase = asyncCatch(async (req, res, next) => {
 });
 
 exports.updateCurrentUser = asyncCatch(async (req, res, next) => {
-
     if (req.body.password || req.body.confirmPassword) {
         return next(new ErrorHandler('To change password, change the route to updatePassword', 400))
     }
-
     const filteredBody = filterObj(req.body, 'name', 'email');
     if (req.file) filteredBody.image = req.file.filename;
 

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 process.on('uncaughtException', err => {
-    console.log(`uncaughtException, Shutitng Down!\n${err.name} ${err.message}`)
+    console.log(`uncaughtException, Shutitng Down!\n${err.name} ${err.message}`);
     process.exit(1);
 });
 
@@ -19,7 +19,7 @@ mongoose.connect(
     }
 ).then(() => {
     console.log('DATABASE CONNECTION SUCCESSFUL!');
-})
+});
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
