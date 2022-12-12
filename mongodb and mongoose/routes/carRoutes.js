@@ -7,26 +7,26 @@ const fileController = require('./../controller/fileController');
 
 const router = express.Router();
 
-router.use('/:carId/review', reviewRouter)
+router.use('/:carId/review', reviewRouter);
 
 router
     .route('/carStats')
-    .get(carController.carStats)
+    .get(carController.carStats);
 
 router
     .route('/carModel')
-    .get(carController.carModels)
+    .get(carController.carModels);
 
 router
     .route('/')
     .get(carController.getAllCar)
-    .post(carController.postCar)
+    .post(carController.postCar);
 
 router
     .route('/:id')
     .get(carController.getCar)
     .patch(carController.updateCar)
-    .delete(carController.deleteCar)
+    .delete(carController.deleteCar);
     // .delete(authController.authUser, authController.restrictTo('admin'), carController.deleteCar)
 
 module.exports = router;

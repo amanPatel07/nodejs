@@ -73,22 +73,21 @@ userSchema.pre(/^find/, function (next) {
     next();
 });
 
-
 userSchema.methods.checkPassword = async function (currentPassword, userPassword) {
-    return await bcrypt.compare(currentPassword, userPassword)
+    return await bcrypt.compare(currentPassword, userPassword);
 }
 
 userSchema.methods.isPasswordChangedAfter = function (JwtTimeStamp) {
     if (this.passwordChangedAt) {
-        const changedTimeStamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10)
-        return JwtTimeStamp < changedTimeStamp
+        const changedTimeStamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+        return JwtTimeStamp < changedTimeStamp;
     }
     return false;
 }
 
 userSchema.methods.updateUserPurchaseDetails = async function (carSold) {
-    await this.car_purchase_details.push(carSold._id)
-    return this.car_purchase_details
+    await this.car_purchase_details.push(carSold._id);
+    return this.car_purchase_details;
 }
 
 const User = mongoose.model('User', userSchema);

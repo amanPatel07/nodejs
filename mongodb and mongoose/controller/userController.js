@@ -52,6 +52,9 @@ exports.carPurchase = asyncCatch(async (req, res, next) => {
         });
 });
 
+/**
+ * Update the current logged in user
+ */
 exports.updateCurrentUser = asyncCatch(async (req, res, next) => {
     if (req.body.password || req.body.confirmPassword) {
         return next(new ErrorHandler('To change password, change the route to updatePassword', 400))
@@ -71,6 +74,9 @@ exports.updateCurrentUser = asyncCatch(async (req, res, next) => {
         });
 });
 
+/**
+ * Delete the current logged in user
+ */
 exports.deleteCurrentUser = asyncCatch(async (req, res, next) => {
     await User.findByIdAndUpdate(req.user._id, { active: false });
     res.status(200)
@@ -105,9 +111,3 @@ exports.getUser = asyncCatch(async (req, res, next) => {
         });
 });
 */
-
-exports.exampleformdata = asyncCatch(async (req, res, next) => {
-    console.log(req.body);
-    console.log(req.file);
-    // console.log(req.file.mimetype.split('/')[1]);
-});
