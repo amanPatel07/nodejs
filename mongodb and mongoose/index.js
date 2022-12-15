@@ -13,7 +13,7 @@ const app = express();
 /**
  * Rendering the HTML templates
  */
-app.set('view-engine', 'pug');
+app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
